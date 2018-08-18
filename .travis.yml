@@ -96,6 +96,11 @@ matrix:
       dist: trusty
     - compiler: gcc
       os: linux
+      env: SWIGLANG=objc
+      sudo: required
+      dist: trusty
+    - compiler: gcc
+      os: linux
       env: SWIGLANG=ocaml
       sudo: required
       dist: trusty
@@ -340,6 +345,9 @@ matrix:
     - compiler: clang
       os: osx
       env: SWIGLANG=lua
+    - compiler: clang
+      os: osx
+      env: SWIGLANG=objc
     - compiler: clang
       os: osx
       env: SWIGLANG=perl5
