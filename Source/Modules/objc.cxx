@@ -340,14 +340,8 @@ int OBJECTIVEC::top(Node *n) {
   }
   // Write to proxy.mm, if required
   if (proxy_flag) {
-//        Printf(f_proxy_mm, "\n#ifdef __cplusplus\n");
-//        Printf(f_proxy_mm, "extern \"C\" {\n");
-//        Printf(f_proxy_mm, "#endif\n\n");
     Dump(swigtypes_mm_code, f_proxy_mm);
     Dump(proxy_mm_code, f_proxy_mm);
-//        Printf(f_proxy_mm, "\n#ifdef __cplusplus\n");
-//        Printf(f_proxy_mm, "}\n");
-//        Printf(f_proxy_mm, "#endif\n");
   }
   // Cleanup
   Delete(wrap_h_code);
