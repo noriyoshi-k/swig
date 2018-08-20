@@ -208,20 +208,18 @@ int OBJECTIVEC::top(Node *n) {
   /* Initialize I/O */
 
   // Create the _wrap files
-  String *wrapfile_h = NewStringf("%s_wrap.h", module);
+  String *wrapfile_h = Getattr(n, "outfile_h");
   f_wrap_h = NewFile(wrapfile_h, "w", SWIG_output_files());
   if (!f_wrap_h) {
     FileErrorDisplay(wrapfile_h);
     SWIG_exit(EXIT_FAILURE);
   }
-  String *wrapfile_mm = NewStringf("%s_wrap.mm", module);
+  String *wrapfile_mm = Getattr(n, "outfile");
   f_wrap_mm = NewFile(wrapfile_mm, "w", SWIG_output_files());
   if (!f_wrap_mm) {
     FileErrorDisplay(wrapfile_mm);
     SWIG_exit(EXIT_FAILURE);
   }
-  Delete(wrapfile_h);
-  Delete(wrapfile_mm);
 
   // Create the _proxy files if proxy flag is true
   if (proxy_flag) {
@@ -264,7 +262,9 @@ int OBJECTIVEC::top(Node *n) {
   Printf(f_wrap_h, "#endif\n\n");
 
   Swig_banner(f_wrap_mm);
-  Printf(f_header, "#include \"%s_wrap.h\"\n", module);
+  String *filename = Swig_file_filename(wrapfile_h);
+  Printf(f_header, "#include \"%s\"\n", filename);
+  Delete(filename);
 
   if (proxy_flag) {
     Swig_banner(f_proxy_h);
